@@ -1,0 +1,62 @@
+<Window xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+		WindowState="Maximized"
+        x:Class="src.MainWindow"
+        Title="Limo Text Editor">
+	<Grid x:Name="contentRenderer">
+		<Grid.RowDefinitions>
+			<RowDefinition Height="50" />
+			<RowDefinition />
+		</Grid.RowDefinitions>
+		<Grid Grid.Row="0" x:Name="navbar">
+			<Grid.ColumnDefinitions>
+				<ColumnDefinition Width="5" />
+				<ColumnDefinition Width="50" />
+				<ColumnDefinition Width="20" />
+				<ColumnDefinition Width="75" />
+			</Grid.ColumnDefinitions>
+			<Button x:Name="file_tools_btn" Content="File" CornerRadius="10" Grid.Column="1"/>
+			<Button x:Name="window_tools_btn" Content="Window" CornerRadius="10" Grid.Column="3"/>
+		</Grid>
+		<Grid Grid.Row="1" x:Name="docRenderer">
+			<Grid.RowDefinitions>
+				<RowDefinition Height="25" />
+				<RowDefinition />
+			</Grid.RowDefinitions>
+			<Grid Grid.Row="0">
+				<Grid.ColumnDefinitions>
+					<ColumnDefinition Width="75" />
+					<ColumnDefinition Width="110" />
+				</Grid.ColumnDefinitions>
+				<Border CornerRadius="10" Grid.Column="0" x:Name="file_tools" Height="0" Margin="5 0 0 0">
+					<ScrollViewer CornerRadius="10" Padding="5">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="35" />
+								<RowDefinition Height="35" />
+							</Grid.RowDefinitions>
+							<Button Content="Open" Grid.Row="0" CornerRadius="10" x:Name="open_file_btn"/>
+						</Grid>
+					</ScrollViewer>
+				</Border>
+				<Border CornerRadius="10" Grid.Column="1" x:Name="window_tools" Height="0" Margin="5 0 0 0">
+					<ScrollViewer CornerRadius="10" Padding="5">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="35" />
+								<RowDefinition Height="35" />
+							</Grid.RowDefinitions>
+							<Button Content="Dark Mode" Grid.Row="0" CornerRadius="10" x:Name="dark_mode_on_btn"/>
+							<Button Content="Light Mode" Grid.Row="1" CornerRadius="10" x:Name="light_mode_on_btn"/>
+						</Grid>
+					</ScrollViewer>
+				</Border>
+			</Grid>
+			<ScrollViewer Grid.Row="1" x:Name="pageViewer">
+			</ScrollViewer>
+		</Grid>
+	</Grid>
+</Window>
