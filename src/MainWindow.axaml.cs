@@ -1,7 +1,7 @@
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
 using JetBrains.Annotations;
-using src.popups;
 using System;
 using System.IO;
 
@@ -27,7 +27,7 @@ namespace src
                 }
                 else
                 {
-                    file_tools.Height = 45;
+                    file_tools.Height = 80;
                     docRenderer.RowDefinitions[0].Height = new GridLength(50);
                     isFileToolsOpened = true;
                 }
@@ -131,14 +131,18 @@ namespace src
                                             case "light":
                                                 SolidColorBrush appBackground = new SolidColorBrush();
                                                 appBackground.Color = Colors.White;
+
                                                 navbar.Background = Brushes.Red;
                                                 file_tools.Background = Brushes.LightGray;
                                                 window_tools.Background = Brushes.LightGray;
                                                 contentRenderer.Background = appBackground;
+                                                open_file_btn.Background = appBackground;
+
                                                 open_file_btn.Foreground = Brushes.Black;
                                                 //open_folder_btn.Foreground = Brushes.Black;
                                                 dark_mode_on_btn.Foreground = Brushes.Black;
                                                 light_mode_on_btn.Foreground = Brushes.Black;
+
                                                 pageBackground.Color = Colors.LightGray;
                                                 break;
 
@@ -147,14 +151,18 @@ namespace src
                                                 SolidColorBrush appBg = new SolidColorBrush();
                                                 scb.Color = Color.FromRgb(75, 75, 75);
                                                 appBg.Color = Color.FromRgb(50, 50, 50);
+
                                                 navbar.Background = Brushes.DarkRed;
                                                 file_tools.Background = scb;
                                                 window_tools.Background = scb;
                                                 contentRenderer.Background = appBg;
+                                                open_file_btn.Background = scb;
+
                                                 open_file_btn.Foreground = Brushes.WhiteSmoke;
                                                 //open_folder_btn.Foreground = Brushes.WhiteSmoke;
                                                 dark_mode_on_btn.Foreground = Brushes.WhiteSmoke;
                                                 light_mode_on_btn.Foreground = Brushes.WhiteSmoke;
+
                                                 pageBackground.Color = Color.FromRgb(75, 75, 75);
                                                 break;
                                         }
@@ -259,6 +267,17 @@ namespace src
                     case "fontsize":
                         btn.FontSize = Double.Parse(property_content);
                         break;
+
+                    case "highlighter":
+                        SolidColorBrush bgBrush;
+                        switch (property_content)
+                        {
+                            case "blue":
+                                bgBrush = new SolidColorBrush(Color.FromArgb(100, 0, 0, 255));
+                                btn.Background = bgBrush;
+                                break;
+                        }
+                        break;
                 }
             }
             btn.Margin = new Avalonia.Thickness(xOffset, yOffset, 0, 0);
@@ -315,6 +334,17 @@ namespace src
 
                     case "fontsize":
                         lbl.FontSize = Double.Parse(property_content);
+                        break;
+
+                    case "highlighter":
+                        SolidColorBrush bgBrush;
+                        switch (property_content)
+                        {
+                            case "blue":
+                                bgBrush = new SolidColorBrush(Color.FromArgb(100, 0, 0, 255));
+                                lbl.Background = bgBrush;
+                                break;
+                        }
                         break;
                 }
             }

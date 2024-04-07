@@ -5,7 +5,7 @@
         mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
 		WindowState="Maximized"
         x:Class="src.MainWindow"
-        Title="Limo Text Editor">
+        Title="Ezra">
 	<Grid x:Name="contentRenderer">
 		<Grid.RowDefinitions>
 			<RowDefinition Height="50" />
@@ -17,9 +17,12 @@
 				<ColumnDefinition Width="50" />
 				<ColumnDefinition Width="20" />
 				<ColumnDefinition Width="75" />
+				<ColumnDefinition Width="20" />
+				<ColumnDefinition Width="75" />
 			</Grid.ColumnDefinitions>
 			<Button x:Name="file_tools_btn" Content="File" CornerRadius="10" Grid.Column="1"/>
 			<Button x:Name="window_tools_btn" Content="Window" CornerRadius="10" Grid.Column="3"/>
+			<Button x:Name="add_elems_tools_btn" Content="Add" CornerRadius="10" Grid.Column="5"/>
 		</Grid>
 		<Grid Grid.Row="1" x:Name="docRenderer">
 			<Grid.RowDefinitions>
@@ -39,6 +42,7 @@
 								<RowDefinition Height="35" />
 							</Grid.RowDefinitions>
 							<Button Content="Open" Grid.Row="0" CornerRadius="10" x:Name="open_file_btn"/>
+							<Button Content="New" Grid.Row="1" CornerRadius="10" x:Name="new_file_btn"/>
 						</Grid>
 					</ScrollViewer>
 				</Border>
