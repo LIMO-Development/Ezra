@@ -4375,11 +4375,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ferdis\\Documents\\GitHub\\LIMO-Point\\src\\src.csproj",
+      "projectUniqueName": "C:\\Users\\Ferdis\\Documents\\GitHub\\Ezra\\src\\src.csproj",
       "projectName": "src",
-      "projectPath": "C:\\Users\\Ferdis\\Documents\\GitHub\\LIMO-Point\\src\\src.csproj",
+      "projectPath": "C:\\Users\\Ferdis\\Documents\\GitHub\\Ezra\\src\\src.csproj",
       "packagesPath": "C:\\Users\\Ferdis\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ferdis\\Documents\\GitHub\\LIMO-Point\\src\\obj\\",
+      "outputPath": "C:\\Users\\Ferdis\\Documents\\GitHub\\Ezra\\src\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
         "C:\\Users\\Ferdis\\AppData\\Roaming\\NuGet\\NuGet.Config",

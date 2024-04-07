@@ -12,13 +12,13 @@ build_property.PlatformNeutralAssembly =
 build_property.EnforceExtendedAnalyzerRules = 
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = src
-build_property.ProjectDir = C:\Users\Ferdis\Documents\GitHub\LIMO-Point\src\
+build_property.ProjectDir = C:\Users\Ferdis\Documents\GitHub\Ezra\src\
 
-[C:/Users/Ferdis/Documents/GitHub/LIMO-Point/src/App.axaml]
+[C:/Users/Ferdis/Documents/GitHub/Ezra/src/App.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/Ferdis/Documents/GitHub/LIMO-Point/src/MainWindow.axaml]
+[C:/Users/Ferdis/Documents/GitHub/Ezra/src/MainWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
 
-[C:/Users/Ferdis/Documents/GitHub/LIMO-Point/src/popups/FileOpenWindow.axaml]
+[C:/Users/Ferdis/Documents/GitHub/Ezra/src/popups/FileOpenWindow.axaml]
 build_metadata.AdditionalFiles.SourceItemGroup = AvaloniaXaml
