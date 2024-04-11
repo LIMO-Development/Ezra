@@ -250,9 +250,10 @@ C:\Users\Ferdis\Documents\GitHub\Ezra\src\obj\Debug\net6.0\src.GeneratedMSBuildE
 C:\Users\Ferdis\Documents\GitHub\Ezra\src\obj\Debug\net6.0\src.AssemblyInfoInputs.cache
 C:\Users\Ferdis\Documents\GitHub\Ezra\src\obj\Debug\net6.0\src.AssemblyInfo.cs
 C:\Users\Ferdis\Documents\GitHub\Ezra\src\obj\Debug\net6.0\src.csproj.CoreCompileInputs.cache
-C:\Users\Ferdis\Documents\GitHub\Ezra\src\obj\Debug\net6.0\src.csproj.CopyComplete
 C:\Users\Ferdis\Documents\GitHub\Ezra\src\obj\Debug\net6.0\src.dll
 C:\Users\Ferdis\Documents\GitHub\Ezra\src\obj\Debug\net6.0\refint\src.dll
 C:\Users\Ferdis\Documents\GitHub\Ezra\src\obj\Debug\net6.0\src.pdb
 C:\Users\Ferdis\Documents\GitHub\Ezra\src\obj\Debug\net6.0\src.genruntimeconfig.cache
 C:\Users\Ferdis\Documents\GitHub\Ezra\src\obj\Debug\net6.0\ref\src.dll
+C:\Users\Ferdis\Documents\GitHub\Ezra\src\obj\Debug\net6.0\src.sourcelink.json
+C:\Users\Ferdis\Documents\GitHub\Ezra\src\obj\Debug\net6.0\src.csproj.Up2Date

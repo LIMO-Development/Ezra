@@ -33,6 +33,7 @@
 				<Grid.ColumnDefinitions>
 					<ColumnDefinition Width="75" />
 					<ColumnDefinition Width="110" />
+					<ColumnDefinition Width="110" />
 				</Grid.ColumnDefinitions>
 				<Border CornerRadius="10" Grid.Column="0" x:Name="file_tools" Height="0" Margin="5 0 0 0">
 					<ScrollViewer CornerRadius="10" Padding="5">
@@ -58,8 +59,21 @@
 						</Grid>
 					</ScrollViewer>
 				</Border>
+				<Border CornerRadius="10" Grid.Column="2" x:Name="add_elems_tools" Height="0" Margin="5 0 0 0">
+					<ScrollViewer CornerRadius="10" Padding="5">
+						<Grid>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="35" />
+								<RowDefinition Height="35" />
+							</Grid.RowDefinitions>
+							<Button Content="Title" Grid.Row="0" CornerRadius="10" x:Name="add_title_btn" />
+							<Button Content="Button" Grid.Row="1" CornerRadius="10" x:Name="add_button_btn" />
+						</Grid>
+					</ScrollViewer>
+				</Border>
 			</Grid>
 			<ScrollViewer Grid.Row="1" x:Name="pageViewer">
+				
 			</ScrollViewer>
 		</Grid>
 	</Grid>

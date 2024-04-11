@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "yaapLdZiObqNf6Ex26aPHVqF3oF7Af24FQyaFbX28zFBdjRjn63kWH8CXEexJGs4KxsC//GYy/1Rqr8UceJrLg==",
+  "dgSpecHash": "QyLs30JAXPrEZKamAjTqU6GIU2udf9/N5GGja46jH+9eAqNfyoQ1std/+YGtuCEavQAwE95d8VaRG5WsTD7Ptw==",
   "success": true,
   "projectFilePath": "C:\\Users\\Ferdis\\Documents\\GitHub\\Ezra\\src\\src.csproj",
   "expectedPackageFiles": [
@@ -71,7 +71,11 @@
     "C:\\Users\\Ferdis\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.3\\system.threading.tasks.extensions.4.5.3.nupkg.sha512",
     "C:\\Users\\Ferdis\\.nuget\\packages\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
     "C:\\Users\\Ferdis\\.nuget\\packages\\tmds.dbus\\0.9.0\\tmds.dbus.0.9.0.nupkg.sha512",
-    "C:\\Users\\Ferdis\\.nuget\\packages\\xamlnamereferencegenerator\\1.6.1\\xamlnamereferencegenerator.1.6.1.nupkg.sha512"
+    "C:\\Users\\Ferdis\\.nuget\\packages\\xamlnamereferencegenerator\\1.6.1\\xamlnamereferencegenerator.1.6.1.nupkg.sha512",
+    "C:\\Users\\Ferdis\\.nuget\\packages\\microsoft.netcore.app.ref\\6.0.28\\microsoft.netcore.app.ref.6.0.28.nupkg.sha512",
+    "C:\\Users\\Ferdis\\.nuget\\packages\\microsoft.windowsdesktop.app.ref\\6.0.28\\microsoft.windowsdesktop.app.ref.6.0.28.nupkg.sha512",
+    "C:\\Users\\Ferdis\\.nuget\\packages\\microsoft.aspnetcore.app.ref\\6.0.28\\microsoft.aspnetcore.app.ref.6.0.28.nupkg.sha512",
+    "C:\\Users\\Ferdis\\.nuget\\packages\\microsoft.netcore.app.host.win-x64\\6.0.28\\microsoft.netcore.app.host.win-x64.6.0.28.nupkg.sha512"
   ],
   "logs": []
 }

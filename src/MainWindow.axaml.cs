@@ -1,7 +1,6 @@
-using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Media;
-using JetBrains.Annotations;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
 using System;
 using System.IO;
 
@@ -9,7 +8,7 @@ namespace src
 {
     public partial class MainWindow : Window
     {
-        public bool isFileToolsOpened = false, isWindowToolsOpened = false, isFileInCreation = false;
+        public bool isFileToolsOpened = false, isWindowToolsOpened = false, isFileInCreation = false, isAddElemsOpened = false, isAnyToolsOpened = false;
         public string filepath = "";
 
         public SolidColorBrush pageBackground = new SolidColorBrush();
@@ -19,16 +18,26 @@ namespace src
             InitializeComponent();
             file_tools_btn.Click += (s, e) =>
             {
+                if (isFileToolsOpened == true || isWindowToolsOpened == true || isAddElemsOpened)
+                {
+                    isAnyToolsOpened = true;
+                }
+                else 
+                {
+                    isAnyToolsOpened = false;
+                }
+
                 if (isFileToolsOpened)
                 {
                     file_tools.Height = 0;
-                    docRenderer.RowDefinitions[0].Height = new GridLength(25);
+                    if (!isAnyToolsOpened)
+                        docRenderer.RowDefinitions[0].Height = new GridLength(25);
                     isFileToolsOpened = false;
                 }
                 else
                 {
                     file_tools.Height = 80;
-                    docRenderer.RowDefinitions[0].Height = new GridLength(50);
+                    docRenderer.RowDefinitions[0].Height = new GridLength(85);
                     isFileToolsOpened = true;
                 }
             };
@@ -52,7 +61,8 @@ namespace src
                 if (isWindowToolsOpened)
                 {
                     window_tools.Height = 0;
-                    docRenderer.RowDefinitions[0].Height = new GridLength(25);
+                    if (!isAnyToolsOpened)
+                        docRenderer.RowDefinitions[0].Height = new GridLength(25);
                     isWindowToolsOpened = false;
                 }
                 else
@@ -60,6 +70,22 @@ namespace src
                     window_tools.Height = 80;
                     docRenderer.RowDefinitions[0].Height = new GridLength(85);
                     isWindowToolsOpened = true;
+                }
+            };
+            add_elems_tools_btn.Click += (s, e) =>
+            {
+                if (isAddElemsOpened) 
+                {
+                    add_elems_tools.Height = 0;
+                    if (!isAnyToolsOpened)
+                        docRenderer.RowDefinitions[0].Height = new GridLength(25);
+                    isAddElemsOpened = false;
+                }
+                else
+                {
+                    add_elems_tools.Height = 80;
+                    docRenderer.RowDefinitions[0].Height = new GridLength(85);
+                    isAddElemsOpened = true;
                 }
             };
             dark_mode_on_btn.Click += (s, e) =>
@@ -91,6 +117,10 @@ namespace src
                 }
                 File.WriteAllText(homepath + "/.limotext/theme.txt", "theme: light;");
                 LoadTheme();
+            };
+            new_file_btn.Click += (s, e) => 
+            {
+                NewFile();
             };
             LoadTheme();
         }
@@ -136,8 +166,9 @@ namespace src
                                                 file_tools.Background = Brushes.LightGray;
                                                 window_tools.Background = Brushes.LightGray;
                                                 contentRenderer.Background = appBackground;
-                                                open_file_btn.Background = appBackground;
+                                                add_elems_tools.Background = Brushes.LightGray;
 
+                                                new_file_btn.Foreground = Brushes.Black;
                                                 open_file_btn.Foreground = Brushes.Black;
                                                 //open_folder_btn.Foreground = Brushes.Black;
                                                 dark_mode_on_btn.Foreground = Brushes.Black;
@@ -156,8 +187,9 @@ namespace src
                                                 file_tools.Background = scb;
                                                 window_tools.Background = scb;
                                                 contentRenderer.Background = appBg;
-                                                open_file_btn.Background = scb;
+                                                add_elems_tools.Background = scb;
 
+                                                new_file_btn.Foreground = Brushes.WhiteSmoke;
                                                 open_file_btn.Foreground = Brushes.WhiteSmoke;
                                                 //open_folder_btn.Foreground = Brushes.WhiteSmoke;
                                                 dark_mode_on_btn.Foreground = Brushes.WhiteSmoke;
@@ -199,7 +231,7 @@ namespace src
                         Button btn = new Button();
                         btn.FontSize = 25;
                         string properties = line.Replace(line.Substring(0, line.IndexOf("(")), "").Replace(line.Substring(line.IndexOf(")")), "");
-                        ParseProps(btn, 0, 0, properties);
+                        ParseProps(btn, page, 0, 0, properties);
                         page.Children.Add(btn);
                         break;
 
@@ -207,7 +239,7 @@ namespace src
                         Label lbl = new Label();
                         lbl.FontSize = 25;
                         string props = line.Replace(line.Substring(0, line.IndexOf("(")), "").Replace(line.Substring(line.IndexOf(")")), "");
-                        ParseProps(lbl, 0, 0, props);
+                        ParseProps(lbl, page, 0, 0, props);
                         page.Children.Add(lbl);
                         break;
                 }
@@ -215,140 +247,181 @@ namespace src
             pageViewer.Content = page;
         }
 
-        public void ParseProps(Button btn, double xOffset, double yOffset, string properties)
+        public void ReadText(String text, Grid page) 
         {
-            foreach (string property in properties.Split(","))
+
+        }
+
+        public void ParseProps(Button btn, Grid page, double xOffset, double yOffset, string properties)
+        {
+            try 
             {
-                string property_name = property.Substring(0, property.IndexOf("="));
-                string property_content = property.Substring(property.IndexOf("=") + 1);
-                switch (property_name)
+                foreach (string property in properties.Split(","))
                 {
-                    case "x":
-                        xOffset = Double.Parse(property_content);
-                        break;
+                    string property_name = property.Substring(0, property.IndexOf("="));
+                    string property_content = property.Substring(property.IndexOf("=") + 1);
+                    switch (property_name)
+                    {
+                        case "x":
+                            xOffset = Double.Parse(property_content);
+                            break;
 
-                    case "y":
-                        yOffset = Double.Parse(property_content);
-                        break;
+                        case "y":
+                            yOffset = Double.Parse(property_content);
+                            break;
 
-                    case "height":
-                        btn.Height = Double.Parse(property_content);
-                        break;
+                        case "height":
+                            btn.Height = Double.Parse(property_content);
+                            break;
 
-                    case "width":
-                        btn.Width = Double.Parse(property_content);
-                        break;
+                        case "width":
+                            btn.Width = Double.Parse(property_content);
+                            break;
 
-                    case "text":
-                        btn.Content = property_content.Replace("\"", "");
-                        break;
+                        case "text":
+                            btn.Content = property_content.Replace("\"", "");
+                            break;
 
-                    case "textalign":
-                        switch (property_content)
-                        {
-                            case "center-h":
-                                btn.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Center;
-                                break;
+                        case "textalign":
+                            switch (property_content)
+                            {
+                                case "center-h":
+                                    btn.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Center;
+                                    break;
 
-                            case "center-v":
-                                btn.VerticalContentAlignment = Avalonia.Layout.VerticalAlignment.Center;
-                                break;
+                                case "center-v":
+                                    btn.VerticalContentAlignment = Avalonia.Layout.VerticalAlignment.Center;
+                                    break;
 
-                            case "left":
-                                btn.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Left;
-                                break;
+                                case "left":
+                                    btn.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Left;
+                                    break;
 
-                            case "right":
-                                btn.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Right;
-                                break;
-                        }
-                        break;
+                                case "right":
+                                    btn.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Right;
+                                    break;
+                            }
+                            break;
 
-                    case "fontsize":
-                        btn.FontSize = Double.Parse(property_content);
-                        break;
+                        case "fontsize":
+                            btn.FontSize = Double.Parse(property_content);
+                            break;
 
-                    case "highlighter":
-                        SolidColorBrush bgBrush;
-                        switch (property_content)
-                        {
-                            case "blue":
-                                bgBrush = new SolidColorBrush(Color.FromArgb(100, 0, 0, 255));
-                                btn.Background = bgBrush;
-                                break;
-                        }
-                        break;
+                        case "highlighter":
+                            SolidColorBrush bgBrush;
+                            switch (property_content)
+                            {
+                                case "blue":
+                                    bgBrush = new SolidColorBrush(Color.FromArgb(100, 0, 0, 255));
+                                    btn.Background = bgBrush;
+                                    break;
+                            }
+                            break;
+                    }
                 }
             }
+            catch (Exception e)
+            {
+                Console.WriteLine("Error: " + e.Message);
+                throw;
+            }
+            
             btn.Margin = new Avalonia.Thickness(xOffset, yOffset, 0, 0);
         }
 
-        public void ParseProps(Label lbl, double xOffset, double yOffset, string properties)
+        public void ParseProps(Label lbl, Grid page, double xOffset, double yOffset, string properties)
         {
-            foreach (string property in properties.Split(","))
+            try 
             {
-                string property_name = property.Substring(0, property.IndexOf("="));
-                string property_content = property.Substring(property.IndexOf("=") + 1);
-                switch (property_name)
+                foreach (string property in properties.Split(","))
                 {
-                    case "x":
-                        xOffset = Double.Parse(property_content);
-                        break;
+                    string property_name = property.Substring(0, property.IndexOf("="));
+                    string property_content = property.Substring(property.IndexOf("=") + 1);
+                    switch (property_name)
+                    {
+                        case "x":
+                            xOffset = Double.Parse(property_content);
+                            break;
 
-                    case "y":
-                        yOffset = Double.Parse(property_content);
-                        break;
+                        case "y":
+                            yOffset = Double.Parse(property_content);
+                            break;
 
-                    case "height":
-                        lbl.Height = Double.Parse(property_content);
-                        break;
+                        case "height":
+                            lbl.Height = Double.Parse(property_content);
+                            break;
 
-                    case "width":
-                        lbl.Width = Double.Parse(property_content);
-                        break;
+                        case "width":
+                            lbl.Width = Double.Parse(property_content);
+                            if (property_content == "full") 
+                            {
+                                lbl.Width = page.Width;
+                            }
+                            break;
 
-                    case "text":
-                        lbl.Content = property_content.Replace("\"", "");
-                        break;
+                        case "text":
+                            lbl.Content = property_content.Replace("\"", "");
+                            break;
 
-                    case "textalign":
-                        switch (property_content)
-                        {
-                            case "center-h":
-                                lbl.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Center;
-                                break;
+                        case "textalign":
+                            switch (property_content)
+                            {
+                                case "center-h":
+                                    lbl.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Center;
+                                    break;
 
-                            case "center-v":
-                                lbl.VerticalContentAlignment = Avalonia.Layout.VerticalAlignment.Center;
-                                break;
+                                case "center-v":
+                                    lbl.VerticalContentAlignment = Avalonia.Layout.VerticalAlignment.Center;
+                                    break;
 
-                            case "left":
-                                lbl.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Left;
-                                break;
+                                case "left":
+                                    lbl.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Left;
+                                    break;
 
-                            case "right":
-                                lbl.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Right;
-                                break;
-                        }
-                        break;
+                                case "right":
+                                    lbl.HorizontalContentAlignment = Avalonia.Layout.HorizontalAlignment.Right;
+                                    break;
+                            }
+                            break;
 
-                    case "fontsize":
-                        lbl.FontSize = Double.Parse(property_content);
-                        break;
+                        case "fontsize":
+                            lbl.FontSize = Double.Parse(property_content);
+                            break;
 
-                    case "highlighter":
-                        SolidColorBrush bgBrush;
-                        switch (property_content)
-                        {
-                            case "blue":
-                                bgBrush = new SolidColorBrush(Color.FromArgb(100, 0, 0, 255));
-                                lbl.Background = bgBrush;
-                                break;
-                        }
-                        break;
+                        case "highlighter":
+                            SolidColorBrush bgBrush;
+                            switch (property_content)
+                            {
+                                case "blue":
+                                    bgBrush = new SolidColorBrush(Color.FromArgb(100, 0, 0, 255));
+                                    lbl.Background = bgBrush;
+                                    break;
+                            }
+                            break;
+                    }
                 }
+            } 
+            catch (Exception e) 
+            {
+                Console.WriteLine("Error: " + e.Message);
+                throw;
             }
+            
             lbl.Margin = new Avalonia.Thickness(xOffset, yOffset, 0, 0);
+        }
+
+        public void NewFile() 
+        {
+            String text = "";
+            pageViewer.Content = null;
+            Grid page = new Grid();
+            page.Margin = new Avalonia.Thickness(25, 0, 25, 0);
+            page.Background = pageBackground;
+            add_title_btn.Click += (s, e) => 
+            {
+                
+            };
+            pageViewer.Content = page;
         }
     }
 }
